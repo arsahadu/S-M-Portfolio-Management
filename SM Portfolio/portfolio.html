@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinnacle Folio - Portfolio Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("portfolioForm").addEventListener("submit", function (event) {
+                event.preventDefault();
+                let stockSymbol = document.getElementById("stockSymbol").value.trim();
+                let quantity = document.getElementById("quantity").value.trim();
+                let price = document.getElementById("price").value.trim();
+                let errorElement = document.getElementById("portfolioError");
+
+                if (stockSymbol === "" || quantity === "" || price === "") {
+                    errorElement.textContent = "All fields are required.";
+                    return;
+                }
+
+                if (isNaN(quantity) || quantity <= 0) {
+                    errorElement.textContent = "Quantity must be a positive number.";
+                    return;
+                }
+
+                if (isNaN(price) || price <= 0) {
+                    errorElement.textContent = "Price must be a positive number.";
+                    return;
+                }
+
+                errorElement.textContent = "";
+                alert("Portfolio Updated Successfully!");
+                this.submit();
+            });
+        });
+    </script>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+            flex-wrap: wrap; /* Allows wrapping of elements */
+        }
+
+        .left-side {
+            width: 25%;
+            background: #292b2c;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            border-right: 2px solid #444;
+            box-sizing: border-box;
+        }
+
+        .left-side h2 {
+            margin-bottom: 30px;
+        }
+
+        .left-side button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            width: 100%;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .left-side button:hover {
+            background-color: #0056b3;
+        }
+
+        .right-side {
+            width: 75%;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            margin-top: 5px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            width: 48%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        /* Responsive Design for smaller screens */
+        @media screen and (max-width: 1024px) {
+            .left-side {
+                width: 100%; /* Make left side take full width on medium screens */
+                order: 2; /* Move the left-side to the bottom */
+            }
+
+            .right-side {
+                width: 100%; /* Make right side take full width on medium screens */
+            }
+
+            .container {
+                padding: 30px;
+            }
+
+            .btn-container {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            body {
+                flex-direction: column; /* Stack the two sections vertically on small screens */
+            }
+
+            .left-side {
+                width: 100%;
+                order: 1;
+                padding: 20px 10px;
+            }
+
+            .right-side {
+                width: 100%;
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="left-side">
+        <h2>Portfolio Options</h2>
+        <button id="addButton">Add Stock</button>
+        <button id="manageButton">Manage Portfolio</button>
+        <button id="editButton">Edit Stock</button>
+    </div>
+
+    <div class="right-side">
+        <div class="container">
+            <h2>Portfolio Management</h2>
+            <form id="portfolioForm">
+                <div class="form-group">
+                    <label for="stockSymbol">Stock Symbol</label>
+                    <input type="text" id="stockSymbol" placeholder="Enter Stock Symbol" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <input type="number" id="quantity" placeholder="Enter Quantity" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="price">Price per Stock</label>
+                    <input type="number" id="price" placeholder="Enter Price" required>
+                </div>
+
+                <div class="btn-container">
+                    <button type="submit">Update Portfolio</button>
+                    <button type="reset">Reset</button>
+                </div>
+                <p id="portfolioError" class="error"></p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinnacle Folio - Sign Up</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("signupForm").addEventListener("submit", function (event) {
+                event.preventDefault();
+                let username = document.getElementById("username").value.trim();
+                let email = document.getElementById("email").value.trim();
+                let password = document.getElementById("password").value.trim();
+                let confirmPassword = document.getElementById("confirmPassword").value.trim();
+                let errorElement = document.getElementById("signupError");
+                
+                if (username === "" || email === "" || password === "" || confirmPassword === "") {
+                    errorElement.textContent = "All fields are required.";
+                    return;
+                }
+                
+                let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailPattern.test(email)) {
+                    errorElement.textContent = "Invalid email format.";
+                    return;
+                }
+                
+                if (password.length < 6) {
+                    errorElement.textContent = "Password must be at least 6 characters long.";
+                    return;
+                }
+                
+                if (password !== confirmPassword) {
+                    errorElement.textContent = "Passwords do not match.";
+                    return;
+                }
+                
+                errorElement.textContent = "";
+                alert("Sign Up Successful!");
+                this.submit();
+            });
+        });
+    </script>
+    <style>
+        body {
+            background: url('bg1.gif') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            position: relative;
+        }
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        .logo h1 {
+            color: white;
+            font-size: 24px;
+            margin: 0;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            width: 450px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            margin-bottom: 10px;
+            font-size: 26px;
+            font-family: Arial, Helvetica, sans-serif
+        }
+        input {
+            width: calc(100% - 24px);
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            background: white;
+            display: block;
+            box-sizing: border-box;
+        }
+        button {
+            width: calc(100% - 24px);
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+            display: block;
+            box-sizing: border-box;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="logo1.png" alt="Pinnacle Folio Logo">
+        <h1>Pinnacle Folio</h1>
+    </div>
+    <div class="container">
+        <h2>Sign Up</h2>
+        <form id="signupForm">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Enter Username" required>
+            
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Enter Email" required>
+            
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter Password" required>
+            
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+            
+            <button type="submit">Sign Up</button>
+            <p id="signupError" class="error"></p>
+        </form>
+    </div>
+</body>
+</html>

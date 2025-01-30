@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinnacle Folio - Login</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("loginForm").addEventListener("submit", function (event) {
+                event.preventDefault();
+                let username = document.getElementById("username").value.trim();
+                let password = document.getElementById("password").value.trim();
+                let errorElement = document.getElementById("loginError");
+                
+                if (username === "" || password === "") {
+                    errorElement.textContent = "Username and password cannot be empty.";
+                    return;
+                }
+                
+                if (password.length < 6) {
+                    errorElement.textContent = "Password must be at least 6 characters long.";
+                    return;
+                }
+                
+                errorElement.textContent = "";
+                alert("Login Successful!");
+                this.submit();
+            });
+        });
+    </script>
+    <style>
+        body {
+            background: url('bg1.gif') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            position: relative;
+        }
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+        
+        }
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        .logo h1 {
+            color: white;
+            font-size: 24px;
+            margin: 0;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 45px;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+            width: 450px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            margin-bottom: 10px;
+            font-size: 26px;
+            font-family: Arial, Helvetica, sans-serif
+        }
+        input, button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input {
+            background: white;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #218838;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="logo1.png" alt="Pinnacle Folio Logo">
+        <h1>Pinnacle Folio</h1>
+    </div>
+    <div class="container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Enter Username" required>
+            
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter Password" required>
+            
+            <button type="submit">Login</button>
+            <p id="loginError" class="error"></p>
+        </form>
+    </div>
+</body>
+</html>
